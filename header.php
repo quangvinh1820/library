@@ -13,7 +13,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body class=" cms-index-index cms-home" style="">
+<body class="<?php echo is_page('trang-chu') ? 'cms-index-index cms-home' : 'thuvien-catalog-product-view'; ?>">
     <div class="wrapper">
         <noscript>
             <div class="global-site-notice noscript">
@@ -32,9 +32,7 @@
                     <div class="store-language-container">
                     </div>
                     <div class="welcome-msg"> </div>
-
                     <div id="header-account" class="skip-content">
-
                     </div>
                 </div>
             </div>
@@ -42,7 +40,7 @@
                 <div class="page-header-container">
                     <div class="header-logo-cart">
                         <div class="top-banner container" id="top-banner-container">
-                            <a class="banner" href="https://thuvien.stellamaris.edu.vn/index.php/">
+                            <a class="banner" href="<?php echo site_url('/trang-chu'); ?>">
                                 <img
                                     src="<?php echo get_theme_file_uri() . '/images/banner.png' ?>">
                             </a>
@@ -52,47 +50,36 @@
                     <div class="search-categories container">
                         <div class="top-search-categories container">
                             <div class="top-categories">
-                                <a href="https://thuvien.stellamaris.edu.vn/index.php/">
+                                <a href="<?php echo site_url('/trang-chu'); ?>">
                                     <img src="<?php echo get_theme_file_uri() . '/images/home.png' ?>"
                                         alt="Thư viện ĐCV Bùi Chu">
                                 </a>
                                 <div class="header-top-categories">
-                                    <span>Danh mục sách </span>
-                                    <!-- <div class="danhmucsach container">
+                                    <span id="toggle-categories">Danh mục sách</span>
+                                    <!-- <div class="danhmucsach">
                                         <ul id="menu">
                                             <li>
-                                                <a
-                                                    href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/000/">000
-                                                    - Tổng quát</a>
+                                                <a href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/000/">000 - Tổng quát</a>
                                             </li>
                                             <li>
-                                                <a
-                                                    href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/100/">100
-                                                    - Triết học</a>
+                                                <a href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/100/">100 - Triết học</a>
                                             </li>
                                             <li>
-                                                <a
-                                                    href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/200/">200
-                                                    - Tôn Giáo</a>
+                                                <a href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/200/">200 - Tôn Giáo</a>
                                             </li>
                                             <li>
-                                                <a
-                                                    href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/300/">300
-                                                    - Khoa học xã hội</a>
+                                                <a href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/300/">300 - Khoa học xã hội</a>
                                             </li>
                                             <li>
-                                                <a
-                                                    href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/400/">400
-                                                    - Ngôn ngữ</a>
+                                                <a href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/400/">400 - Ngôn ngữ</a>
                                             </li>
                                             <li>
-                                                <a
-                                                    href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/500/">500
-                                                    - KH tự nhiên - toán học</a>
+                                                <a href="https://thuvien.stellamaris.edu.vn/index.php/thuvien/catalog_category/list/id/500/">500 - KH tự nhiên - toán học</a>
                                             </li>
                                         </ul>
                                     </div> -->
                                 </div>
+
                             </div>
                             <div id="header-search" class="skip-content">
                                 <form id="search_mini_form"

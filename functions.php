@@ -24,26 +24,49 @@ function load_assets(){
     wp_enqueue_script( "matchMedia", get_theme_file_uri() . '/js/lib/matchMedia.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "matchMedia_min", get_theme_file_uri() . '/js/lib/matchMedia.addListener.js', array('jquery'), '1.02', true );
 
-    wp_enqueue_script( "app", get_theme_file_uri() . '/js/app.js', array('jquery'), '1.02', true );
+    wp_enqueue_script( "app", get_theme_file_uri() . '/js/app.js', array(''), '1.02', true );
     wp_enqueue_script( "ccard", get_theme_file_uri() . '/js/ccard.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "minicart", get_theme_file_uri() . '/js/minicart.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "slideshow", get_theme_file_uri() . '/js/slideshow.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "thuvien_common", get_theme_file_uri() . '/js/thuvien_common.js', array('jquery'), '1.02', true );
 
     wp_enqueue_script( "cookies", get_theme_file_uri() . '/js/mage/cookies.js', array('jquery'), '1.02', true );
-    wp_enqueue_script( "translate", get_theme_file_uri() . '/js/mage/translate.js', array('jquery'), '1.02', true );
+    wp_enqueue_script( "translate", get_theme_file_uri() . '/js/mage/translate.js', array(''), '1.02', true );
 
     wp_enqueue_script( "prototype", get_theme_file_uri() . '/js/prototype/prototype.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "validation", get_theme_file_uri() . '/js/prototype/validation.js', array('jquery'), '1.02', true );
 
     wp_enqueue_script( "builder", get_theme_file_uri() . '/js/scriptaculous/builder.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "controls", get_theme_file_uri() . '/js/scriptaculous/controls.js', array('jquery'), '1.02', true );
-    wp_enqueue_script( "dragdrop", get_theme_file_uri() . '/js/scriptaculous/dragdrop.js', array('jquery'), '1.02', true );
+    wp_enqueue_script( "dragdrop", get_theme_file_uri() . '/js/scriptaculous/dragdrop.js', array(''), '1.02', true );
     wp_enqueue_script( "effects", get_theme_file_uri() . '/js/scriptaculous/effects.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "slider", get_theme_file_uri() . '/js/scriptaculous/slider.js', array('jquery'), '1.02', true );
 
     wp_enqueue_script( "form", get_theme_file_uri() . '/js/varien/form.js', array('jquery'), '1.02', true );
     wp_enqueue_script( "js", get_theme_file_uri() . '/js/varien/js.js', array('jquery'), '1.02', true );
 
+    //mainjs
+    wp_enqueue_script( "mainjs", get_theme_file_uri() . '/js/main.js', array('jquery'), '1.02', true );
+
 }
 add_action("wp_enqueue_scripts","load_assets");
+
+
+function get_featured_books_with_author() {
+    global $wpdb;
+
+    $query = "
+        SELECT wp_posts.ID, wp_posts.post_title, wp_post_views.count, wp_postmeta.meta_value AS tacgia
+        FROM {$wpdb->prefix}posts wp_posts
+        INNER JOIN {$wpdb->prefix}post_views wp_post_views
+        ON wp_posts.ID = wp_post_views.id
+        LEFT JOIN {$wpdb->prefix}postmeta wp_postmeta
+        ON wp_posts.ID = wp_postmeta.post_id AND wp_postmeta.meta_key = 'tacgia'
+        WHERE wp_posts.post_type = 'home_book_ui_cpt'
+        AND wp_posts.post_status = 'publish'
+        ORDER BY wp_post_views.count DESC
+        LIMIT 10
+    ";
+
+    return $wpdb->get_results($query);
+}
